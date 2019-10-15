@@ -23,6 +23,11 @@ def dodaj_segment(x, y, na_koniec=True):
     return segment
 
 
+def schowaj_ostatni_segment():
+    SEGMENTY[-1].hideturtle()
+    SEGMENTY.pop()
+
+
 def idz_do_gory():
     print("Wciśnięto klawisz góra")
 
@@ -37,6 +42,7 @@ def idz_w_lewo():
     nowe_x = obecne_x - SZEROKOSC_ELEMENTU
     nowe_y = obecne_y
     dodaj_segment(nowe_x, nowe_y, na_koniec=False)
+    schowaj_ostatni_segment()
     print("Wciśnięto klawisz lewo")
 
 
