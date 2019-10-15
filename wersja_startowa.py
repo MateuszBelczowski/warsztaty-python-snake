@@ -2,20 +2,24 @@ import time
 import turtle
 
 ROZMIAR_PLANSZY = 600
-LICZBA_SEGMENTOW_POCZATKOWYCH = 10
+LICZBA_SEGMENTOW_POCZATKOWYCH = 2
 SZEROKOSC_ELEMENTU = 20
 
 SEGMENTY = []
 
 
-def dodaj_segment(x, y):
+def dodaj_segment(x, y, na_koniec=True):
     segment = turtle.Turtle()
     segment.speed(2)
     segment.shape("square")
     segment.color("green")
     segment.penup()
     segment.goto(x, y)
-    SEGMENTY.append(segment)
+    global SEGMENTY
+    if na_koniec:
+        SEGMENTY.append(segment)
+    else:
+        SEGMENTY = [segment] + SEGMENTY
     return segment
 
 
@@ -28,6 +32,11 @@ def idz_na_dol():
 
 
 def idz_w_lewo():
+    obecne_x = SEGMENTY[0].xcor()
+    obecne_y = SEGMENTY[0].ycor()
+    nowe_x = obecne_x - SZEROKOSC_ELEMENTU
+    nowe_y = obecne_y
+    dodaj_segment(nowe_x, nowe_y, na_koniec=False)
     print("Wciśnięto klawisz lewo")
 
 
